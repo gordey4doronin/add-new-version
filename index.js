@@ -11,7 +11,7 @@ async function run() {
     core.debug(`owner: ${owner}`);
     core.debug(`repo: ${repo}`);
 
-    const masterRef = await octokit.git.getRef({ owner, repo, ref: 'refs/heads/master' });
+    const masterRef = await octokit.git.getRef({ owner, repo, ref: 'heads/master' });
     const masterSha = masterRef.data.object.sha;
     core.debug(`masterSha: ${masterSha}`);
 
