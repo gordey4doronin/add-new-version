@@ -8,9 +8,16 @@ async function run() {
 
     const { owner, repo } = github.context.repo;
 
+    core.debug(`owner: ${owner}`);
+    core.debug(`repo: ${repo}`);
+
     const masterRef = await octokit.git.getRef({ owner, repo, ref: 'refs/heads/master' });
+    const masterSha = masterRef.data.object.sha;
+    core.debug(`masterSha: ${masterSha}`);
 
     const newRefName = `refs/heads/apple-version-history-${uuid.v4()}`;
+    core.debug(`newRefName: ${newRefName}`);
+
     await octokit.git.createRef({ owner, repo, ref: newRefName, sha: masterRef.data.object.sha })
 
     await octokit.pulls.create({ owner, repo, title: 'Test PR created by action', head: newRefName, base: 'master', });
