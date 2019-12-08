@@ -1,0 +1,9 @@
+name: 'Add New Version'
+description: 'Creates a PR adding a new Apple version'
+inputs:
+  repo-token:
+    description: 'Token for the repo. Can be passed in using {{ secrets.GITHUB_TOKEN }}'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
